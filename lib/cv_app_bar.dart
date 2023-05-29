@@ -1,6 +1,8 @@
 import 'package:cv/linkedin_icon.dart';
 import 'package:flutter/material.dart';
 
+import 'github_icon.dart';
+
 class CvAppBarFactory {
   static const double _nameFontSize = 20;
   static const double _titleFontSize = _nameFontSize / 1.5;
@@ -10,18 +12,12 @@ class CvAppBarFactory {
         title: const Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Column(
-              children: [LinkedInIcon()],
-            ),
-            Column(
-              children: [
-                _NameText(nameFontSize: _nameFontSize),
-                _TitleText(titleFontSize: _titleFontSize),
-              ],
-            ),
-            Column(
-              children: [LinkedInIcon()],
-            ),
+            Column(children: [LinkedInIcon()]),
+            Column(children: [
+              _NameText(nameFontSize: _nameFontSize),
+              _TitleText(titleFontSize: _titleFontSize),
+            ]),
+            Column(children: [GitHubIcon()]),
           ],
         ),
       );
