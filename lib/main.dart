@@ -1,3 +1,4 @@
+import 'package:cv/content.dart';
 import 'package:flutter/material.dart';
 
 import 'cv_app_bar.dart';
@@ -11,10 +12,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const adrBlue = Color(0xff26718f);
     return MaterialApp(
       title: 'Gediminas Fridricas CV',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepOrange),
+        colorScheme: ColorScheme.fromSeed(seedColor: adrBlue),
         useMaterial3: true,
       ),
       home: const HomePage(),
@@ -28,5 +30,6 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) => Scaffold(
         appBar: CvAppBarFactory.create(context),
+        body: const ContentPage(),
       );
 }
