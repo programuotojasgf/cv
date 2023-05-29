@@ -15,21 +15,8 @@ class CvAppBarFactory {
             ),
             Column(
               children: [
-                Text(
-                  'Gediminas Fridricas',
-                  style: TextStyle(
-                    fontFamily: "Montserrat",
-                    fontWeight: FontWeight.bold,
-                    fontSize: _nameFontSize,
-                  ),
-                ),
-                Text(
-                  'Senior Software Engineer',
-                  style: TextStyle(
-                    fontFamily: "Montserrat",
-                    fontSize: _titleFontSize,
-                  ),
-                ),
+                _NameText(nameFontSize: _nameFontSize),
+                _TitleText(titleFontSize: _titleFontSize),
               ],
             ),
             Column(
@@ -38,4 +25,45 @@ class CvAppBarFactory {
           ],
         ),
       );
+}
+
+class _TitleText extends StatelessWidget {
+  const _TitleText({
+    super.key,
+    required double titleFontSize,
+  }) : _titleFontSize = titleFontSize;
+
+  final double _titleFontSize;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      'Senior Software Engineer',
+      style: TextStyle(
+        fontFamily: "Montserrat",
+        fontSize: _titleFontSize,
+      ),
+    );
+  }
+}
+
+class _NameText extends StatelessWidget {
+  const _NameText({
+    super.key,
+    required double nameFontSize,
+  }) : _nameFontSize = nameFontSize;
+
+  final double _nameFontSize;
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      'Gediminas Fridricas',
+      style: TextStyle(
+        fontFamily: "Montserrat",
+        fontWeight: FontWeight.bold,
+        fontSize: _nameFontSize,
+      ),
+    );
+  }
 }
