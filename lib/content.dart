@@ -23,12 +23,7 @@ class ContentPage extends StatelessWidget {
         children: [
           _profile(),
           _techSkills(),
-          AccordionSection(
-            isOpen: false,
-            leftIcon: const Icon(Icons.emoji_objects, color: Colors.white),
-            header: Text('Soft skills', style: _headerStyle),
-            content: const Icon(Icons.people, size: 200),
-          ),
+          _softSkills(),
           AccordionSection(
             leftIcon: const Icon(Icons.desk, color: Colors.white),
             header: Text('Employment history', style: _headerStyle),
@@ -116,57 +111,99 @@ class ContentPage extends StatelessWidget {
         ],
       );
 
-  AccordionSection _techSkills() {
-    return AccordionSection(
-      isOpen: false,
-      leftIcon: const Icon(Icons.stars, color: Colors.white),
-      header: Text('Tech Skills', style: _headerStyle),
-      content: DataTable(
-        showBottomBorder: false,
-        headingRowHeight: 0,
-        dataTextStyle: const TextStyle(
-            color: Colors.black,
-            fontFamily: "Montserrat",
-            fontSize: 20,
-            fontWeight: FontWeight.bold),
-        columns: const [
-          DataColumn(label: Text('')),
-          DataColumn(label: Text('')),
-        ],
-        rows: const [
-          DataRow(cells: [
-            DataCell(Text('C#')),
-            DataCell(Text('•••••', style: TextStyle(fontSize: 40))),
-          ]),
-          DataRow(cells: [
-            DataCell(Text('C# .NET')),
-            DataCell(Text('•••••', style: TextStyle(fontSize: 40))),
-          ]),
-          DataRow(cells: [
-            DataCell(Text('Microsoft Azure')),
-            DataCell(Text('••••◦', style: TextStyle(fontSize: 40))),
-          ]),
-          DataRow(cells: [
-            DataCell(Text('Automated Testing')),
-            DataCell(Text('•••••', style: TextStyle(fontSize: 40))),
-          ]),
-          DataRow(cells: [
-            DataCell(Text('SQL')),
-            DataCell(Text('••••◦', style: TextStyle(fontSize: 40))),
-          ]),
-        ],
-      ),
-    );
-  }
+  AccordionSection _softSkills() => AccordionSection(
+        isOpen: true,
+        leftIcon: const Icon(Icons.emoji_objects, color: Colors.white),
+        header: Text('Soft skills', style: _headerStyle),
+        contentBorderColor: const Color(0xffffffff),
+        content: Accordion(
+          maxOpenSections: 1,
+          headerBackgroundColor: Colors.black38,
+          headerBackgroundColorOpened: Colors.black54,
+          contentBorderColor: Colors.black54,
+          contentHorizontalPadding: 20,
+          headerPadding:
+              const EdgeInsets.symmetric(vertical: 7, horizontal: 15),
+          children: [
+            AccordionSection(
+              isOpen: true,
+              leftIcon: const Icon(Icons.book, color: Colors.white),
+              header: Text('Reading software development books',
+                  style: _headerStyle),
+              content: Text(
+                'This is one thing I emphasise to all my mentees - reading software development '
+                'books is like a legal cheat code. Never stop learning.\n\n'
+                'My starter pack is:\n'
+                '• The Pragmatic Programmer: From Journeyman to Master - a good, light-ish read to start with\n'
+                '• Code Complete - if it would have to be one and only one book, this is it.\n'
+                '• Clean Code - more of a fundamentals book.',
+                style: _contentStyle,
+              ),
+            ),
+            AccordionSection(
+              isOpen: true,
+              leftIcon: const Icon(Icons.people, color: Colors.white),
+              header: Text('Teamwork', style: _headerStyle),
+              content: Text(
+                'I trully believe software development is a team effort. I strive to instill a \'We\' mentality.\n'
+                'We had more success when we went the democratic way, voting on choices and supporting each other '
+                'rather than going solo at problems head on.',
+                style: _contentStyle,
+              ),
+            ),
+          ],
+        ),
+      );
 
-  AccordionSection _profile() {
-    return AccordionSection(
-      isOpen: true,
-      leftIcon: const Icon(Icons.person, color: Colors.white),
-      header: Text('Profile', style: _headerStyle),
-      content: Text(
-          'Senior Software Engineer with proven experience of leading teams to success.\r\nThe main goal is always to deliver actual value. Keeping iterations short, delivering often through CI/CD.\r\nMy core strenghs are in backend development. Microservices, REST APIs, Messaging, C#, .NET, MSSQL, NoSQL, Azure.',
-          style: _contentStyle),
-    );
-  }
+  AccordionSection _techSkills() => AccordionSection(
+        isOpen: false,
+        leftIcon: const Icon(Icons.stars, color: Colors.white),
+        header: Text('Tech Skills', style: _headerStyle),
+        content: DataTable(
+          showBottomBorder: false,
+          headingRowHeight: 0,
+          dataTextStyle: const TextStyle(
+              color: Colors.black,
+              fontFamily: "Montserrat",
+              fontSize: 20,
+              fontWeight: FontWeight.bold),
+          columns: const [
+            DataColumn(label: Text('')),
+            DataColumn(label: Text('')),
+          ],
+          rows: const [
+            DataRow(cells: [
+              DataCell(Text('C#')),
+              DataCell(Text('•••••', style: TextStyle(fontSize: 40))),
+            ]),
+            DataRow(cells: [
+              DataCell(Text('C# .NET')),
+              DataCell(Text('•••••', style: TextStyle(fontSize: 40))),
+            ]),
+            DataRow(cells: [
+              DataCell(Text('Microsoft Azure')),
+              DataCell(Text('••••', style: TextStyle(fontSize: 40))),
+            ]),
+            DataRow(cells: [
+              DataCell(Text('Automated Testing')),
+              DataCell(Text('•••••', style: TextStyle(fontSize: 40))),
+            ]),
+            DataRow(cells: [
+              DataCell(Text('SQL')),
+              DataCell(Text('••••', style: TextStyle(fontSize: 40))),
+            ]),
+          ],
+        ),
+      );
+
+  AccordionSection _profile() => AccordionSection(
+        isOpen: false,
+        leftIcon: const Icon(Icons.person, color: Colors.white),
+        header: Text('Profile', style: _headerStyle),
+        content: Text(
+            'Senior Software Engineer with proven experience of leading teams to success.\n'
+            'The main goal is always to deliver actual value. Keeping iterations short, delivering often through CI/CD.\n'
+            'My core strenghs are in backend development. Microservices, REST APIs, Messaging, C#, .NET, MSSQL, NoSQL, Azure.',
+            style: _contentStyle),
+      );
 } //__
