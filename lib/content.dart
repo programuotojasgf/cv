@@ -18,54 +18,12 @@ class ContentPage extends StatelessWidget {
         headerBackgroundColorOpened: Colors.amber,
         scaleWhenAnimating: true,
         openAndCloseAnimation: true,
-        headerPadding: const EdgeInsets.symmetric(vertical: 7, horizontal: 15),
         sectionOpeningHapticFeedback: SectionHapticFeedback.light,
         children: [
           _profile(),
           _techSkills(),
           _softSkills(),
-          AccordionSection(
-            leftIcon: const Icon(Icons.desk, color: Colors.white),
-            header: Text('Employment history', style: _headerStyle),
-            contentBorderColor: const Color(0xffffffff),
-            content: Accordion(
-              maxOpenSections: 1,
-              headerBackgroundColorOpened: Colors.black54,
-              headerPadding:
-                  const EdgeInsets.symmetric(vertical: 7, horizontal: 15),
-              children: [
-                AccordionSection(
-                  isOpen: true,
-                  leftIcon:
-                      const Icon(Icons.insights_rounded, color: Colors.white),
-                  headerBackgroundColor: Colors.black38,
-                  headerBackgroundColorOpened: Colors.black54,
-                  header: Text('Nested Section #1', style: _headerStyle),
-                  content: Text(_loremIpsum, style: _contentStyle),
-                  contentHorizontalPadding: 20,
-                  contentBorderColor: Colors.black54,
-                ),
-                AccordionSection(
-                  isOpen: true,
-                  leftIcon:
-                      const Icon(Icons.compare_rounded, color: Colors.white),
-                  header: Text('Nested Section #2', style: _headerStyle),
-                  headerBackgroundColor: Colors.black38,
-                  headerBackgroundColorOpened: Colors.black54,
-                  contentBorderColor: Colors.black54,
-                  content: Row(
-                    children: [
-                      const Icon(Icons.compare_rounded,
-                          size: 120, color: Colors.orangeAccent),
-                      Flexible(
-                          flex: 1,
-                          child: Text(_loremIpsum, style: _contentStyle)),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-          ),
+          _employmentHistory(),
           AccordionSection(
             leftIcon: const Icon(Icons.add_reaction, color: Colors.white),
             header: Text('Recommendations', style: _headerStyle),
@@ -73,8 +31,6 @@ class ContentPage extends StatelessWidget {
             content: Accordion(
               maxOpenSections: 1,
               headerBackgroundColorOpened: Colors.black54,
-              headerPadding:
-                  const EdgeInsets.symmetric(vertical: 7, horizontal: 15),
               children: [
                 AccordionSection(
                   isOpen: true,
@@ -84,7 +40,6 @@ class ContentPage extends StatelessWidget {
                   headerBackgroundColorOpened: Colors.black54,
                   header: Text('Nested Section #1', style: _headerStyle),
                   content: Text(_loremIpsum, style: _contentStyle),
-                  contentHorizontalPadding: 20,
                   contentBorderColor: Colors.black54,
                 ),
                 AccordionSection(
@@ -111,8 +66,81 @@ class ContentPage extends StatelessWidget {
         ],
       );
 
-  AccordionSection _softSkills() => AccordionSection(
+  AccordionSection _employmentHistory() => AccordionSection(
         isOpen: true,
+        leftIcon: const Icon(Icons.desk, color: Colors.white),
+        header: Text('Employment history', style: _headerStyle),
+        contentBorderColor: const Color(0xffffffff),
+        content: Accordion(
+          maxOpenSections: 1,
+          headerBackgroundColor: Colors.black38,
+          headerBackgroundColorOpened: Colors.black54,
+          contentBorderColor: Colors.black54,
+          children: [
+            _employmentSection(
+                'Lead Senior Software Engineer, TransUnion, Oct 2021',
+                'Leading the team to migrate a Consumer Credit Verification monolith to microservices.',
+                '.NET Core · Microsoft SQL Server · C# · .NET Framework'),
+            _employmentSection(
+                'Senior Software Engineer, Omnisend, May 2021 — Sep 2021',
+                'Enhancing the capabilities of automated marketing in a microservices oriented '
+                    'architecture to squeeze out better conversion rates.',
+                'Golang, MongoDB, CI/CD, Microservices, Kubernetes, Docker, Grafana, Graylog'),
+            _employmentSection(
+                'Senior Software Engineer, Xplicity, Oct 2019 — Apr 2021',
+                'First project - outsourced to TransUnion, Deliver a new gen credit score analysis tool, '
+                    'that shows a consumers credit score over time.\n\n'
+                    'Second project - Agiboo. Maintained and improved an enterprise level commodities '
+                    'trading platform.',
+                'C#, .NET Core, .NET Framework, MSSQL, MongoDB, Azure DevOps, Octopus '
+                    'Deploy, DockerC#, .NET Core, .NET Framework, MSSQL, MongoDB, Azure DevOps '
+                    'Octopus Deploy, Docker'),
+            _employmentSection(
+                'Lead Senior Software Engineer, Bentley Systems, Dec 2018 — Oct 2019',
+                'Led the team to successfully deliver a new gen heavy industry tool for planning road '
+                    'construction.',
+                'C# · .NET Core · Microsoft SQL Server · Azure'),
+            _employmentSection(
+                'Senior Software Engineer, Bentley Systems, Jul 2018 — Dec 2018',
+                'Maintained and improved a critical enterprise system for managing documents.',
+                'C++ · JavaScript'),
+            _employmentSection(
+                'Lead Senior Software Developer, Present Connection, Jul 2016 — Jun 2018',
+                'Led the team to deliver a ERP for ThyssenKrupp Marine Systems.',
+                '.NET Framework · Microsoft SQL Server · C# · C++ · Python'),
+            _employmentSection(
+                'Senior Software Engineer, Present Connection, Oct 2015 — Jul 2016',
+                'Added new planning capabilities to an existing ERP for ThyssenKrupp Marine Systems.',
+                'C++ · Qt'),
+          ],
+        ),
+      );
+
+  AccordionSection _employmentSection(
+          String headerText, String summary, String skills) =>
+      AccordionSection(
+        isOpen: true,
+        leftIcon: const Icon(Icons.work, color: Colors.white),
+        header: Text(headerText, style: _headerStyle),
+        content: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(summary, style: _contentStyle),
+            const SizedBox(height: 8.0),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text('Skills:',
+                    style: TextStyle(fontWeight: FontWeight.bold)),
+                Flexible(fit: FlexFit.loose, child: Text(skills)),
+              ],
+            ),
+          ],
+        ),
+      );
+
+  AccordionSection _softSkills() => AccordionSection(
+        isOpen: false,
         leftIcon: const Icon(Icons.emoji_objects, color: Colors.white),
         header: Text('Soft skills', style: _headerStyle),
         contentBorderColor: const Color(0xffffffff),
@@ -121,15 +149,11 @@ class ContentPage extends StatelessWidget {
           headerBackgroundColor: Colors.black38,
           headerBackgroundColorOpened: Colors.black54,
           contentBorderColor: Colors.black54,
-          contentHorizontalPadding: 20,
-          headerPadding:
-              const EdgeInsets.symmetric(vertical: 7, horizontal: 15),
           children: [
             AccordionSection(
               isOpen: true,
               leftIcon: const Icon(Icons.book, color: Colors.white),
-              header: Text('Reading software development books',
-                  style: _headerStyle),
+              header: Text('Software development books', style: _headerStyle),
               content: Text(
                 'This is one thing I emphasise to all my mentees - reading software development '
                 'books is like a legal cheat code. Never stop learning.\n\n'
